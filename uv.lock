@@ -90,6 +90,7 @@ dependencies = [
 dev = [
     { name = "blue" },
     { name = "mypy" },
+    { name = "types-flask-migrate" },
 ]
 
 [package.metadata]
@@ -104,6 +105,7 @@ requires-dist = [
 dev = [
     { name = "blue", specifier = ">=0.9.1" },
     { name = "mypy", specifier = ">=1.15.0" },
+    { name = "types-flask-migrate", specifier = ">=4.1.0.20250112" },
 ]
 
 [[package]]
@@ -370,6 +372,19 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/5b/b9/1ed31d167be802da0fc95020d04cd27b7d7065cc6fbefdd2f9186f60d7bd/tomli-2.2.1-cp313-cp313-win32.whl", hash = "sha256:d3f5614314d758649ab2ab3a62d4f2004c825922f9e370b29416484086b264ec", size = 98724 },
     { url = "https://files.pythonhosted.org/packages/c7/32/b0963458706accd9afcfeb867c0f9175a741bf7b19cd424230714d722198/tomli-2.2.1-cp313-cp313-win_amd64.whl", hash = "sha256:a38aa0308e754b0e3c67e344754dff64999ff9b513e691d0e786265c93583c69", size = 109383 },
     { url = "https://files.pythonhosted.org/packages/6e/c2/61d3e0f47e2b74ef40a68b9e6ad5984f6241a942f7cd3bbfbdbd03861ea9/tomli-2.2.1-py3-none-any.whl", hash = "sha256:cb55c73c5f4408779d0cf3eef9f762b9c9f147a77de7b258bef0a5628adc85cc", size = 14257 },
+]
+
+[[package]]
+name = "types-flask-migrate"
+version = "4.1.0.20250112"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "flask" },
+    { name = "flask-sqlalchemy" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/d6/2a/15d922ddd3fad1ec0e06dab338f20c508becacaf8193ff373aee6986a1cc/types_flask_migrate-4.1.0.20250112.tar.gz", hash = "sha256:f2d2c966378ae7bb0660ec810e9af0a56ca03108235364c2a7b5e90418b0ff67", size = 8650 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/36/01/56e26643c54c5101a7bc11d277d15cd871b05a8a3ddbcc9acd3634d7fff8/types_Flask_Migrate-4.1.0.20250112-py3-none-any.whl", hash = "sha256:1814fffc609c2ead784affd011de92f0beecd48044963a8c898dd107dc1b5969", size = 8727 },
 ]
 
 [[package]]

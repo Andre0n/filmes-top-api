@@ -15,6 +15,7 @@ dependencies = [
 dev = [
     "blue>=0.9.1",
     "mypy>=1.15.0",
+    "types-flask-migrate>=4.1.0.20250112",
 ]
 
 [tool.mypy]
