@@ -1,6 +1,5 @@
-def main():
-    print('Hello from filmes-top-api!')
+from app import create_app
 
 
 if __name__ == '__main__':
-    main()
+    create_app().run()
