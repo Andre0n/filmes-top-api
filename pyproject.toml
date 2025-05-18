@@ -43,3 +43,4 @@ plugins =["sqlalchemy.ext.mypy.plugin"]
 [tool.isort]
 profile = "hug"
 skip="migrations/,.venv/"
+skip_gitignore = true
