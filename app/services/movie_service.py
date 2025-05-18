@@ -2,8 +2,8 @@ from flask import Response, jsonify
 
 from ..dtos.movie_dto import ListMovieResponseDto, MovieResponseDto
 from ..repositories.movies_repository import MovieRepository
-from ..schemas.movie.get_movie_request_schema import GetMovieRequest
 from ..schemas.movie.create_movie_schema import CreateMovieRequest
+from ..schemas.movie.get_movie_request_schema import GetMovieRequest
 
 
 class MovieService:
