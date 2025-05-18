@@ -4,6 +4,7 @@ from .blueprints.api_blueprint import api_blueprint
 from .config import EnvironmentType, config
 from .extensions import register_extensions
 from .models import *
+from .utils.error_handlers import handle_exception
 
 
 def create_app(config_name: EnvironmentType = 'development') -> Flask:
@@ -13,5 +14,6 @@ def create_app(config_name: EnvironmentType = 'development') -> Flask:
     register_extensions(app)
 
     app.register_blueprint(api_blueprint)
+    app.register_error_handler(Exception, handle_exception)
 
     return app
