@@ -2,8 +2,13 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from sqlalchemy.orm import DeclarativeBase
+
 if TYPE_CHECKING:
-    from flask_sqlalchemy.model import Model
+
+    class Model(DeclarativeBase):
+        __abstract__ = True
+
 else:
     from ..extensions import db
 
