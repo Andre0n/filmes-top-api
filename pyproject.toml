@@ -14,6 +14,7 @@ dependencies = [
 [dependency-groups]
 dev = [
     "blue>=0.9.1",
+    "isort>=6.0.1",
     "mypy>=1.15.0",
     "types-flask-migrate>=4.1.0.20250112",
 ]
@@ -37,3 +38,7 @@ warn_return_any = true
 warn_unused_configs = true
 warn_unused_ignores = true
 exclude="migrations"
+
+[tool.isort]
+profile = "hug"
+skip="migrations/,.venv/"
