@@ -20,7 +20,7 @@ ApiErrors: Dict[ApiErrorCodes, ApiBaseError] = {
         status=500, description='Erro interno no servidor', data=[]
     ),
     ApiErrorCodes.MOVIE_TITLE_ALREADY_EXISTS: ApiBaseError(
-        status=400,
+        status=409,
         description='Um filme com esse título já existe',
         data=[],
     ),
