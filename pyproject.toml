@@ -38,6 +38,7 @@ warn_return_any = true
 warn_unused_configs = true
 warn_unused_ignores = true
 exclude="migrations"
+plugins =["sqlalchemy.ext.mypy.plugin"]
 
 [tool.isort]
 profile = "hug"
