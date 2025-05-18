@@ -1,8 +1,7 @@
 from flask import Flask
 
-from .config import config, EnvironmentType
+from .config import EnvironmentType, config
 from .extensions import register_extensions
-
 from .models import *
 
 
