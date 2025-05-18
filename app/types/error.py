@@ -3,9 +3,16 @@ from typing import Dict, List
 
 
 class ApiErrorCodes(str, Enum):
+    # General errors
     INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR'
+
+    # Movie errors
     MOVIE_TITLE_ALREADY_EXISTS = 'MOVIE_TITLE_ALREADY_EXISTS'
     ERROR_CREATING_MOVIE = 'ERROR_CREATING_MOVIE'
+    MOVIE_NOT_FOUND = 'MOVIE_NOT_FOUND'
+
+    # Validation errors
+    VALIDATION_ERROR = 'VALIDATION_ERROR'
 
 
 class ApiBaseError:
@@ -27,6 +34,16 @@ ApiErrors: Dict[ApiErrorCodes, ApiBaseError] = {
     ApiErrorCodes.ERROR_CREATING_MOVIE: ApiBaseError(
         status=500,
         description='Erro ao criar filme',
+        data=[],
+    ),
+    ApiErrorCodes.VALIDATION_ERROR: ApiBaseError(
+        status=400,
+        description='Ocorreu um erro de validação',
+        data=[],
+    ),
+    ApiErrorCodes.MOVIE_NOT_FOUND: ApiBaseError(
+        status=404,
+        description='Filme não encontrado',
         data=[],
     ),
 }
