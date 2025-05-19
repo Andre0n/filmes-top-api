@@ -7,7 +7,12 @@ class TestMovieRentalController:
     def test_rent_movie_success(self, client: FlaskClient, auth_headers: Headers, test_movie: Dict[str, int | str]):
         """Test successfully renting a movie"""
         movie_id = test_movie['id']
-        client.post(f'/api/movies/{movie_id}/rent', headers=auth_headers)
+        response = client.post(f'/api/movies/{movie_id}/rent', headers=auth_headers)
+
+        assert response.json
+        assert response.status_code == 200
+        assert response.json['message'] == "Filme alugado com sucesso"
+
 
         rental_response = client.get(
             '/api/movies?rented=true', 
