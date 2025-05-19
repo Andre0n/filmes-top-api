@@ -1,5 +1,5 @@
 import os
-from typing import Dict, Literal, Type
+from typing import Dict, Type
 
 from dotenv import load_dotenv
 
@@ -23,8 +23,7 @@ class ProductionConfig(Config):
     DEBUG = False
 
 
-EnvironmentType = Literal['development', 'production', 'test']
-config: Dict[EnvironmentType, Type[Config]] = {
+config: Dict[str, Type[Config]] = {
     'development': DevelopmentConfig,
     'production': ProductionConfig,
 }
