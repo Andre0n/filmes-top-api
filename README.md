@@ -39,7 +39,7 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 uv sync
 
 # Rode as migrations
-uv flask db upgrade
+uv run flask db upgrade
 ```
 
 #### 2.1 Rode o main.py
