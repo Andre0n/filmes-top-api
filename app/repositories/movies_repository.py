@@ -4,6 +4,7 @@ from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 
 from ..extensions import db
 from ..models.movie import Movie
+from ..schemas.movie.create_movie_schema import CreateMovieRequest
 from ..types.error import ApiErrorCodes
 from ..utils.exceptions import CustomException
 
@@ -69,17 +70,38 @@ class MovieRepository:
                 ApiErrorCodes.INTERNAL_SERVER_ERROR, data={'errors': str(e)}
             ) from e
 
-    def create(self, title: str, year: int) -> Movie:
+    def create(self, create_movie_request: CreateMovieRequest) -> Movie:
         try:
-            movie = Movie(title=title, year=year)
+            title = create_movie_request.title
+            year = create_movie_request.year
+            genre = create_movie_request.genre
+            durateion_minutes = create_movie_request.duration
+
+            if not title or not year or not genre or not durateion_minutes:
+                raise CustomException(
+                    ApiErrorCodes.ERROR_CREATING_MOVIE,
+                )
+
+            movie = Movie(
+                title=title,
+                year=year,
+                genre=genre,
+                duration_minutes=durateion_minutes,
+            )
             db.session.add(movie)
             db.session.commit()
             return movie
         except IntegrityError as e:
+            db.session.rollback()
             raise CustomException(
-                ApiErrorCodes.MOVIE_TITLE_ALREADY_EXISTS, data={'title': title}
+                ApiErrorCodes.MOVIE_TITLE_ALREADY_EXISTS,
+                data={'title': create_movie_request.title},
             ) from e
         except SQLAlchemyError as e:
+            db.session.rollback()
             raise CustomException(
                 ApiErrorCodes.ERROR_CREATING_MOVIE, data={'errors': str(e)}
             ) from e
+        except CustomException as e:
+            db.session.rollback()
+            raise e

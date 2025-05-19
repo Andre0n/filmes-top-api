@@ -8,3 +8,4 @@ class GetMovieRequest(BaseModel):
     limit: Optional[int] = Field(default=100, ge=1, le=100)
     search: Optional[str] = Field(default=None, max_length=100)
     genre: Optional[str] = Field(default=None, max_length=50)
+    rented: Optional[bool] = Field(default=None, description='Filter by rented status')

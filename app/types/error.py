@@ -24,6 +24,10 @@ class ApiErrorCodes(str, Enum):
     EMAIL_OR_PASSWORD_INCORRECT = 'EMAIL_OR_PASSWORD_INCORRECT'
     USER_NOT_AUTHENTICATED = 'USER_NOT_AUTHENTICATED'
 
+    # Rental errors
+    MOVIE_ALREADY_RENTED = 'MOVIE_ALREADY_RENTED'
+    RENTAL_NOT_FOUND = 'RENTAL_NOT_FOUND'
+
 
 class ApiBaseError:
     def __init__(self, status: int, description: str, data: List[str]) -> None:
@@ -51,6 +55,19 @@ UserErrors: Dict[ApiErrorCodes, ApiBaseError] = {
     ApiErrorCodes.USER_NOT_FOUND: ApiBaseError(
         status=404,
         description='Usuário não encontrado',
+        data=[],
+    ),
+}
+
+RentalErrors: Dict[ApiErrorCodes, ApiBaseError] = {
+    ApiErrorCodes.MOVIE_ALREADY_RENTED: ApiBaseError(
+        status=409,
+        description='O filme já está alugado',
+        data=[],
+    ),
+    ApiErrorCodes.RENTAL_NOT_FOUND: ApiBaseError(
+        status=404,
+        description='Alugel não encontrado',
         data=[],
     ),
 }
@@ -94,4 +111,5 @@ ApiErrors: Dict[ApiErrorCodes, ApiBaseError] = {
     ),
     **UserErrors,
     **AuthErrors,
+    **RentalErrors,
 }

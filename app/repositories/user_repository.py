@@ -45,6 +45,16 @@ class UserRepository:
             db.session.rollback()
             raise CustomException(ApiErrorCodes.USER_ALREADY_EXISTS) from e
 
+    def find_by_id(self, user_id: str) -> User:
+        try:
+            user = db.session.query(User).filter_by(id=user_id).first()
+            if not user:
+                raise CustomException(ApiErrorCodes.USER_NOT_FOUND)
+            return user
+        except CustomException as e:
+            db.session.rollback()
+            raise e
+
     def find_by_email(self, email: str) -> User:
         try:
             user = db.session.query(User).filter_by(email=email).first()

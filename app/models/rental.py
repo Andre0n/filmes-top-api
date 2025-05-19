@@ -1,5 +1,5 @@
 from __future__ import annotations
- 
+
 from datetime import datetime, timezone
 from typing import TYPE_CHECKING
 from uuid import uuid4
