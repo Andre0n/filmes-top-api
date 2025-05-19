@@ -16,9 +16,7 @@ if TYPE_CHECKING:
 class Review(Model):
     __tablename__ = 'reviews'
 
-    id: Mapped[int] = mapped_column(
-        primary_key=True, autoincrement=True
-    )
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     user_id: Mapped[str] = mapped_column(
         ForeignKey('users.id'), nullable=False
     )

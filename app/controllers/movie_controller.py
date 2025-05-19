@@ -42,7 +42,7 @@ class MovieRentalController(MethodView):
             user_repository=UserRepository(),
             rental_repository=RentalRepository(),
         )
-    
+
     @jwt_required()   # type: ignore
     def post(self, movie_id: str) -> Response:
         return self.movie_service.rent_movie(movie_id, get_jwt_identity())

@@ -25,7 +25,9 @@ class MovieService:
         self.user_repository = user_repository
         self.rental_repository = rental_repository
 
-    def get_movies(self, get_movie_request: GetMovieRequest, user_id: str = '') -> Response:
+    def get_movies(
+        self, get_movie_request: GetMovieRequest, user_id: str = ''
+    ) -> Response:
         if get_movie_request.search:
             movies = self.movie_repository.find_by_title(
                 get_movie_request.search
@@ -83,9 +85,12 @@ class MovieService:
         )
 
         if rental:
-            raise CustomException(ApiErrorCodes.MOVIE_ALREADY_RENTED, data={
-                'movie_id': movie_id,
-            })
+            raise CustomException(
+                ApiErrorCodes.MOVIE_ALREADY_RENTED,
+                data={
+                    'movie_id': movie_id,
+                },
+            )
 
         expiration_date = datetime.now() + timedelta(days=7)
         self.rental_repository.create(
@@ -96,7 +101,7 @@ class MovieService:
             status_code=200,
             message='Filme alugado com sucesso',
         )
-    
+
     def get_rented_movies(self, user_id: str) -> Response:
         user = self.user_repository.find_by_id(user_id)
 
