@@ -31,10 +31,14 @@ class MovieController(MovieBaseController):
     @validate_query(GetMovieRequest)
     def get(self, movie_id: str, query: GetMovieRequest) -> Response:
 
-        if query.rented:
-            return self.movie_service.get_rented_movies(self.user_id)
+        user_id = self.user_id
+
         if movie_id:
-            return self.movie_service.get_movie(movie_id)
+            return self.movie_service.get_movie(movie_id, user_id)
+
+        if query.rented:
+            return self.movie_service.get_rented_movies(user_id)
+
         return self.movie_service.get_movies(query)
 
     @validate_body(CreateMovieRequest, 'create_movie_request')
