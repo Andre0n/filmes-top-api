@@ -46,3 +46,7 @@ plugins =["sqlalchemy.ext.mypy.plugin"]
 profile = "hug"
 skip="migrations/,.venv/"
 skip_gitignore = true
+
+[tool.blue]
+skip_gitignore = true
+exclude = "migrations/|.venv/"
