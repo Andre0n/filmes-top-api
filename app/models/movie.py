@@ -21,6 +21,7 @@ class Movie(Model):
     )
     description: Mapped[str] = mapped_column(nullable=True)
     duration_minutes: Mapped[int] = mapped_column(nullable=True)
+    genre: Mapped[str] = mapped_column(nullable=False)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=False,
