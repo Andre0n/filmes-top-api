@@ -20,6 +20,15 @@ class MovieService:
                 status_code=200,
                 data=ListMovieResponseDto.from_model(movies).__dict__,
             )
+    
+        if get_movie_request.genre:
+            movies = self.movie_repository.find_by_genre(
+                get_movie_request.genre
+            )
+            return ApiResponse.send(
+                status_code=200,
+                data=ListMovieResponseDto.from_model(movies).__dict__,
+            )
 
         page = get_movie_request.page or 1
         page_size = get_movie_request.limit or 100
