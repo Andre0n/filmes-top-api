@@ -55,7 +55,7 @@ UserErrors: Dict[ApiErrorCodes, ApiBaseError] = {
     ),
     ApiErrorCodes.USER_EMAIL_ALREADY_EXISTS: ApiBaseError(
         status=409,
-        description='E-mail já existe',
+        description='Um usuário com esse e-mail já existe',
         data=[],
     ),
     ApiErrorCodes.USER_NOT_FOUND: ApiBaseError(
