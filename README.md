@@ -26,7 +26,35 @@ FLASK_APP=main.py
 JWT_SECRET_KEY=your_jwt_secret_key
 ```
 
-### 2. Suba o ambiente com Docker
+### 2. Rodando sem docker
+
+Altere o DATABASE_URL para sua instância no .env
+
+Instale o uv
+
+```bash
+# Instale o uv
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+uv sync
+
+# Rode as migrations
+uv flask db upgrade
+```
+
+#### 2.1 Rode o main.py
+
+```bash
+uv run main.py
+```
+
+#### 2.2 Rodando os testes
+
+```bash
+uv run pytest -v
+```
+
+### 3. Subindo o ambiente com Docker
 
 ```bash
 docker compose up --build
