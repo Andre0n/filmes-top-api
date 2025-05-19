@@ -59,10 +59,21 @@ class MovieService:
             data={'movies': ListMovieResponseDto.from_model(movies).__dict__}
         )
 
-    def get_movie(self, movie_id: str) -> Response:
+    def get_movie(self, movie_id: str, user_id: str) -> Response:
         movie = self.movie_repository.find_by_id(movie_id)
+        rental = self.rental_repository.find_by_user_and_movie(
+            user_id=user_id, movie_id=movie_id
+        )
+
+        response_dto: MovieResponseDto = MovieResponseDto.from_model(movie)
+        if rental:
+            response_dto = MovieResponseDto.from_model(
+                movie, rental.rented_at.isoformat()
+            )
+
         return ApiResponse.send(
-            data=MovieResponseDto.from_model(movie).__dict__
+            data=response_dto.__dict__,
+            message='Filme encontrado com sucesso',
         )
 
     def create_movie(
@@ -114,7 +125,6 @@ class MovieService:
         rentals = self.rental_repository.find_by_user_id(user_id)
 
         return ApiResponse.send(
-            message='Filmes alugados encontrados com sucesso',
             data={
                 'movies': ListRentedMoviesResponseDto.from_model(
                     rentals
