@@ -11,6 +11,7 @@ from ..types.model import Model
 
 if TYPE_CHECKING:
     from .rental import Rental
+    from .review import Review
 
 
 class User(Model):
@@ -40,3 +41,4 @@ class User(Model):
     )
 
     rentals: Mapped[List[Rental]] = relationship(back_populates='user')
+    reviews: Mapped[List[Review]] = relationship(back_populates='user')

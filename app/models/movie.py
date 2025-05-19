@@ -11,6 +11,7 @@ from ..types.model import Model
 
 if TYPE_CHECKING:
     from .rental import Rental
+    from .review import Review
 
 
 class Movie(Model):
@@ -39,3 +40,4 @@ class Movie(Model):
     )
 
     rentals: Mapped[list[Rental]] = relationship(back_populates='movie')
+    reviews: Mapped[list[Review]] = relationship(back_populates='movie')
