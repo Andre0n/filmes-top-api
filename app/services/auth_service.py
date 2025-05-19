@@ -1,5 +1,5 @@
 from flask import Response
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token  # pyright: ignore
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from app.types.error import ApiErrorCodes
