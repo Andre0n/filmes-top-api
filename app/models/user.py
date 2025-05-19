@@ -1,5 +1,7 @@
+from __future__ import annotations
+
 from datetime import datetime, timezone
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, List
 from uuid import uuid4
 
 from sqlalchemy import DateTime
@@ -37,4 +39,4 @@ class User(Model):
         onupdate=lambda: datetime.now(timezone.utc),
     )
 
-    rentals: Mapped[list[Rental]] = relationship(back_populates='user')
+    rentals: Mapped[List[Rental]] = relationship(back_populates='user')
