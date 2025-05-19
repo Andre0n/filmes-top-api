@@ -14,6 +14,16 @@ class ApiErrorCodes(str, Enum):
     # Validation errors
     VALIDATION_ERROR = 'VALIDATION_ERROR'
 
+    # User errors
+    USER_ALREADY_EXISTS = 'USER_ALREADY_EXISTS'
+    USER_NAME_ALREADY_EXISTS = 'USER_NAME_ALREADY_EXISTS'
+    USER_EMAIL_ALREADY_EXISTS = 'USER_EMAIL_ALREADY_EXISTS'
+    USER_NOT_FOUND = 'USER_NOT_FOUND'
+
+    # Authentication errors
+    EMAIL_OR_PASSWORD_INCORRECT = 'EMAIL_OR_PASSWORD_INCORRECT'
+    USER_NOT_AUTHENTICATED = 'USER_NOT_AUTHENTICATED'
+
 
 class ApiBaseError:
     def __init__(self, status: int, description: str, data: List[str]) -> None:
@@ -21,6 +31,42 @@ class ApiBaseError:
         self.description = description
         self.data = data
 
+
+UserErrors: Dict[ApiErrorCodes, ApiBaseError] = {
+    ApiErrorCodes.USER_ALREADY_EXISTS: ApiBaseError(
+        status=409,
+        description='Um usuário com esse nome de usuário ou e-mail já existe',
+        data=[],
+    ),
+    ApiErrorCodes.USER_NAME_ALREADY_EXISTS: ApiBaseError(
+        status=409,
+        description='Nome de usuário já existe',
+        data=[],
+    ),
+    ApiErrorCodes.USER_EMAIL_ALREADY_EXISTS: ApiBaseError(
+        status=409,
+        description='E-mail já existe',
+        data=[],
+    ),
+    ApiErrorCodes.USER_NOT_FOUND: ApiBaseError(
+        status=404,
+        description='Usuário não encontrado',
+        data=[],
+    ),
+}
+
+AuthErrors: Dict[ApiErrorCodes, ApiBaseError] = {
+    ApiErrorCodes.EMAIL_OR_PASSWORD_INCORRECT: ApiBaseError(
+        status=401,
+        description='E-mail ou senha incorretos',
+        data=[],
+    ),
+    ApiErrorCodes.USER_NOT_AUTHENTICATED: ApiBaseError(
+        status=401,
+        description='Usuário não autenticado',
+        data=[],
+    ),
+}
 
 ApiErrors: Dict[ApiErrorCodes, ApiBaseError] = {
     ApiErrorCodes.INTERNAL_SERVER_ERROR: ApiBaseError(
@@ -46,4 +92,6 @@ ApiErrors: Dict[ApiErrorCodes, ApiBaseError] = {
         description='Filme não encontrado',
         data=[],
     ),
+    **UserErrors,
+    **AuthErrors,
 }
