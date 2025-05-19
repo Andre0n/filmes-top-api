@@ -105,3 +105,11 @@ class MovieRepository:
         except CustomException as e:
             db.session.rollback()
             raise e
+
+    def update_rating(self, movie: Movie, new_rating: float) -> Movie:
+        movie.total_reviews = movie.total_reviews + 1
+        movie.average_rating = (
+            (movie.average_rating * (movie.total_reviews - 1)) + new_rating
+        ) / movie.total_reviews
+        db.session.commit()
+        return movie
