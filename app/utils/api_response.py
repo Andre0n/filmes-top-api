@@ -6,7 +6,7 @@ from flask import Response, make_response
 class ApiResponse:
     @staticmethod
     def send(
-        status_code: int = 200, message: str = '', data: Any = None
+        status_code: int = 200, message: str = '', data: Any = {}
     ) -> Response:
         return make_response(
             {
