@@ -1,12 +1,16 @@
 from __future__ import annotations
 
 from datetime import datetime, timezone
+from typing import TYPE_CHECKING
 from uuid import uuid4
 
 from sqlalchemy import DateTime
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from ..types.model import Model
+
+if TYPE_CHECKING:
+    from .rental import Rental
 
 
 class Movie(Model):
@@ -33,3 +37,5 @@ class Movie(Model):
         default=lambda: datetime.now(timezone.utc),
         onupdate=lambda: datetime.now(timezone.utc),
     )
+
+    rentals: Mapped[list[Rental]] = relationship(back_populates='movie')
