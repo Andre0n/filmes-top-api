@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 
 class ApiErrorCodes(str, Enum):
@@ -28,9 +28,15 @@ class ApiErrorCodes(str, Enum):
     MOVIE_ALREADY_RENTED = 'MOVIE_ALREADY_RENTED'
     RENTAL_NOT_FOUND = 'RENTAL_NOT_FOUND'
 
+    # Review errors
+    TRY_REVIEW_NOT_RENTED_MOVIE = 'TRY_REVIEW_NOT_RENTED_MOVIE'
+    TRY_REVIEW_ALREADY_RATED_MOVIE = 'TRY_REVIEW_ALREADY_RATED_MOVIE'
+
 
 class ApiBaseError:
-    def __init__(self, status: int, description: str, data: List[str]) -> None:
+    def __init__(
+        self, status: int, description: str, data: Optional[List[str]] = None
+    ) -> None:
         self.status = status
         self.description = description
         self.data = data
@@ -68,6 +74,19 @@ RentalErrors: Dict[ApiErrorCodes, ApiBaseError] = {
     ApiErrorCodes.RENTAL_NOT_FOUND: ApiBaseError(
         status=404,
         description='Alugel não encontrado',
+        data=[],
+    ),
+}
+
+ReviewErrors: Dict[ApiErrorCodes, ApiBaseError] = {
+    ApiErrorCodes.TRY_REVIEW_NOT_RENTED_MOVIE: ApiBaseError(
+        status=400,
+        description='Tentativa de avaliar um filme que não foi alugado',
+        data=[],
+    ),
+    ApiErrorCodes.TRY_REVIEW_ALREADY_RATED_MOVIE: ApiBaseError(
+        status=409,
+        description='Tentativa de avaliar um filme que já foi avaliado',
         data=[],
     ),
 }
@@ -112,4 +131,5 @@ ApiErrors: Dict[ApiErrorCodes, ApiBaseError] = {
     **UserErrors,
     **AuthErrors,
     **RentalErrors,
+    **ReviewErrors,
 }
