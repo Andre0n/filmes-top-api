@@ -34,7 +34,9 @@ class MovieService:
             )
             return ApiResponse.send(
                 status_code=200,
-                data={'movies': ListMovieResponseDto.from_model(movies).__dict__},
+                data={
+                    'movies': ListMovieResponseDto.from_model(movies).__dict__
+                },
             )
 
         if get_movie_request.genre:
@@ -43,7 +45,9 @@ class MovieService:
             )
             return ApiResponse.send(
                 status_code=200,
-                data={'movies': ListMovieResponseDto.from_model(movies).__dict__},
+                data={
+                    'movies': ListMovieResponseDto.from_model(movies).__dict__
+                },
             )
 
         page = get_movie_request.page or 1
@@ -111,7 +115,11 @@ class MovieService:
 
         return ApiResponse.send(
             message='Filmes alugados encontrados com sucesso',
-            data={'movies': ListRentedMoviesResponseDto.from_model(rentals).__dict__},
+            data={
+                'movies': ListRentedMoviesResponseDto.from_model(
+                    rentals
+                ).__dict__
+            },
         )
 
     def add_review(
