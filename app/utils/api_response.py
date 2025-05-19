@@ -12,7 +12,7 @@ class ApiResponse:
             {
                 'code': status_code,
                 'message': message,
-                'data': data,
+                **data,
             },
             status_code,
         )
