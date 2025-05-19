@@ -18,8 +18,12 @@ class Rental(Model):
     id: Mapped[str] = mapped_column(
         primary_key=True, default=lambda: str(uuid4())
     )
-    user_id: Mapped[str] = mapped_column(ForeignKey('users.id'), nullable=False)
-    movie_id: Mapped[str] = mapped_column(ForeignKey('movies.id'), nullable=False)
+    user_id: Mapped[str] = mapped_column(
+        ForeignKey('users.id'), nullable=False
+    )
+    movie_id: Mapped[str] = mapped_column(
+        ForeignKey('movies.id'), nullable=False
+    )
     rented_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=False,

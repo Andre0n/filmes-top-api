@@ -1,4 +1,5 @@
 from .movie import Movie
-from .user import User
 from .rental import Rental
+from .user import User
+
 __all__ = ['Movie', 'User', 'Rental']

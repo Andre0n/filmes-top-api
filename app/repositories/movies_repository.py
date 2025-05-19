@@ -54,7 +54,7 @@ class MovieRepository:
             ) from e
         except CustomException as e:
             raise e
-        
+
     def find_by_genre(
         self, genre: str, skip: int | None = 0, limit: int | None = 100
     ) -> list[Movie]:
