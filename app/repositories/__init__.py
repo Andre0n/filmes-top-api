@@ -1,3 +1,4 @@
 from .movies_repository import MovieRepository
+from .user_repository import UserRepository
 
-__all__ = ['MovieRepository']
+__all__ = ['MovieRepository', 'UserRepository']
