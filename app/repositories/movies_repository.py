@@ -54,6 +54,20 @@ class MovieRepository:
             ) from e
         except CustomException as e:
             raise e
+        
+    def find_by_genre(
+        self, genre: str, skip: int | None = 0, limit: int | None = 100
+    ) -> list[Movie]:
+        try:
+            query = db.session.query(Movie).filter(
+                Movie.genre.ilike(f'%{genre}%')
+            )
+            movies = query.offset(skip).limit(limit).all()
+            return movies
+        except SQLAlchemyError as e:
+            raise CustomException(
+                ApiErrorCodes.INTERNAL_SERVER_ERROR, data={'errors': str(e)}
+            ) from e
 
     def create(self, title: str, year: int) -> Movie:
         try:
