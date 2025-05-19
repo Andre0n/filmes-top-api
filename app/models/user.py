@@ -1,5 +1,6 @@
 from datetime import datetime, timezone
 from uuid import uuid4
+
 from sqlalchemy import DateTime
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -20,12 +21,12 @@ class User(Model):
         nullable=False,
         default=False,
     )
-    created_at: Mapped[DateTime] = mapped_column(
+    created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=False,
         default=lambda: datetime.now(timezone.utc),
     )
-    updated_at: Mapped[DateTime] = mapped_column(
+    updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=False,
         default=lambda: datetime.now(timezone.utc),
