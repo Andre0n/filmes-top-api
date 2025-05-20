@@ -21,7 +21,6 @@ class TestMovieController:
             if redirect_location:
                 response = client.post(redirect_location, json=data, headers=auth_headers)
     
-        # Now verify the response
         assert response.status_code == 201
         assert response.json is not None
         assert response.json['title'] == data['title']

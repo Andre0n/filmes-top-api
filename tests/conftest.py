@@ -4,7 +4,6 @@ from flask import Flask
 from flask.testing import FlaskClient
 from werkzeug.datastructures import Headers
 
-# Assuming your app is created in a module named 'app'
 from app import create_app
 from app.extensions import db
 
